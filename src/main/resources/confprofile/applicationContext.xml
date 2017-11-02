@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder
+		location="classpath:/db.properties, classpath:/app.properties" />
+
+	<bean id="chargeCalculator" class="net.madvirus.spring4.chap04.ChargeCalculator">
+		<property name="batchSize" value="${calc.batchSize}" />
+		<property name="connectionProvider" ref="connProvider" />
+	</bean>
+
+	<!-- xml 설정에서 프로필 사용하기 -->
+	<beans profile="dev">
+	<!-- beans 중첩태그 -->
+	<!-- 같은 목적을 위해 사용되는 빈 설정을 XML 파일에 모을 수 있고 관리 쉬워짐 -->
+	<!-- 중첩 태그 이후에는 <bean> 설정을 추가할 수 없으니 이전에 하면 됨! -->
+		<bean id="connProvider" class="net.madvirus.spring4.chap04.JdbcConnectionProvider"
+			init-method="init">
+			<property name="driver" value="${db.driver}" />
+			<property name="url" value="${db.jdbcUrl}" />
+			<property name="user" value="${db.user}" />
+			<property name="password">
+				<value>${db.password}</value>
+			</property>
+		</bean>
+	</beans>
+
+	<beans profile="prod">
+		<bean id="connProvider" class="net.madvirus.spring4.chap04.JndiConnectionProvider">
+			<property name="jndiName" value="java:/comp/env/jdbc/db" />
+		</bean>
+	</beans>
+
+</beans>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="classpath:/db.properties, classpath:/app.properties" />
+	<!-- XML 설정을 이용한다면 매우 간단한 방법으로 프로퍼티 파일 이용 할 수 있다. -->
+	<!-- context:property-placeholder : 지정한 프로퍼티 파일로부터 정보 읽어와 값으로 변경 -->
+</beans>
+
