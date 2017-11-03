@@ -10,11 +10,14 @@
 		<property name="basenames">
 			<list>
 				<value>message.greeting</value>
+				<!-- message 패키지에 있는 greeting.properties -->
+				<!-- 혹은 greeting_언어.properties로부터 가져옴  -->
 			</list>
 		</property>
 		<property name="defaultEncoding" value="UTF-8" />
 		<!-- 프로퍼티를 UTF-8로 읽겠다 -->
-	</bean>
+		<!-- UTF-8로 작성된 메시지 파일을 올바르게 읽어온다. -->
+	</bean> 
 
 </beans>
 
